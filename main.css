@@ -1,0 +1,145 @@
+/* @font-face {
+    src: url(webfonts/PokemonHollowNormal-pyPZ.ttf);
+    font-family: PokemonHollowNormal;
+    src: url(webfonts/PokemonSolidNormal-xyWR.ttf);
+    font-family: PokemonSolidNormal;
+} */
+
+@font-face {
+    src: url(webfonts/pokemon-gb-font/PokemonGb-RAeo.ttf);
+    font-family: pokemon-gb-font;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background: rgb(0, 153, 255);
+    color: white;
+    font-family: pokemon-gb-font;
+    font-size: small;
+}
+
+.container-2 {
+    border: solid;
+    padding: 10px;
+    display: inline-block;
+    position: relative;
+    font-size: 100%;
+    color: yellow;
+    width: 100%;
+}
+
+form{
+    padding: 10px;
+    text-align: 10px;
+    display: inline-block;
+    position: relative;
+    font-size: 150%;
+    color: yellow;
+}
+
+.header {
+    width: 100%;
+    height: 80px;
+    display: block;
+    background-color: lightblue;
+  }
+  .inner-header {
+    width: 100%;
+    height: 100%;
+    display: block;
+    margin: 0 auto;
+    background-color: blue;
+    /* font-family: PokemonHollowNormal; */
+  }
+  .logo-container {
+    height: 100%;
+    display: table;
+    float: left;
+  }
+  .logo-container h1 {
+    color: white;
+    height: 100%;
+    display: table-cell;
+    vertical-align: middle;
+    font-weight: 200;
+    font-style: italic;
+  }
+
+p {
+    color: yellow;
+    font-weight: bolder;
+    margin: auto;
+    margin-top: 1em;
+    width: 80%;
+}
+
+ul {
+    list-style-type: none;
+    width: 90%;
+    margin: auto;
+    margin-top: 10px;
+}
+li.logo-container {
+    margin: 10px;
+}
+.nav-link {
+    float: right;
+    margin-top: 30px;
+    margin-right: 14px;
+    list-style-type: none;
+}
+.attack-li {
+    float: left;
+    line-height: 14;
+}
+/* .ability-li {
+    float: left;
+    line-height: 14;
+} */
+
+span.name {
+    text-transform: capitalize;
+    color: rgb(255, 230, 0);
+    font-size: x-large;
+    /* font-family: PokemonHollowNormal; */
+}
+span.type {
+    text-transform: capitalize;
+}
+span.attack-list {
+    color: red;
+    font-size: larger;
+}
+span.ability-list {
+    color: red;
+    font-size: larger;
+}
+
+a {
+    text-decoration: none;
+    color: yellow;
+}
+li:hover {
+    color: red;
+    transition: .3s ease-in-out;
+}
+
+
+button {
+    color: yellow;
+    background-color: blue;
+    border-radius: 7px;
+    border-color: yellow;
+}
+button:hover {
+    color: red;
+}
+
+
+
+@media screen and (max-width: 600px) {
+   
+}
