@@ -42,6 +42,8 @@ const createPokemonData = (results, image) => {
     const abilities = results.abilities.length < 1 ? "unknown" : results.abilities.map(object => object.ability.name).join("");
     const species = results.species.name;
     const weight = results.weight;
+    
+    console.log('IMAGE', image)
 
     let moveList = [];
     for (let i = 0; i < 10; i++) {
@@ -128,11 +130,11 @@ const render = () => {
 /* ---------- AJAX REQUEST ---------- */
 
 // const getApiImage = (query, data) => {
-//     console.log('fetching poke image')
+//     console.log('sprite URL, fetching image', query)
 
 //     const options = {
 //         type: 'GET', 
-//         "url": `${query}`,
+//         "url": `https://pokeapi.co/api/v2/pokemon-form/${query}`,
 //         success: image => {
 //             renderPokemonResults(data, image)
 //             console.log('Success, image')
@@ -150,11 +152,11 @@ const getApiData = (query) => {
         type: 'GET', 
         "url": `https://pokeapi.co/api/v2/pokemon/${query}`,
         success: data => {
-            console.log('Success, data:', data.sprites.front_default)
-            // const image = data.sprites.front_default
-            // getApiImage(image, data)
-            console.log('DATA', data)
+            const urlImage = data.sprites.front_default;
+            getApiImage(urlImage, data)
             renderPokemonResults(data)
+            // console.log('Sprite data:', data.sprites.front_default)
+            console.log('All DATA', data)
         },
         catch: err => console.log(err)
     }
