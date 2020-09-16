@@ -12,7 +12,7 @@ const setState = (newItem, currentState=STATE) => {
 
 /* ---------- TEMPLATE HELPERS ---------- */
 
-const createAttackMovePage = results => {
+const createAttackMoveData = results => {
     const accuracy = results.accuracy;
     const damageClass = results.damage_class.name;
     const name = results.name;
@@ -21,22 +21,20 @@ const createAttackMovePage = results => {
     const target = results.target.name;
     const type = results.type.name;
 
-    console.log(accuracy, damageClass, name, power, pp, target, type)
-
     return (`
-    <div class="container-2">
-        <p>Name: ${name}</p>
-        <p>Power: ${power}</p>
-        <p>PP: ${pp}</p>
-        <p>Accuracy: ${accuracy}</p>
-        <p>Type: ${type}</p>
-        <p>Damage Class: ${damageClass}</p>
-        <p>Target: ${target}</p>
-    </div>
+        <div class="container-2">
+            <p>Name: ${name}</p>
+            <p>Power: ${power}</p>
+            <p>PP: ${pp}</p>
+            <p>Accuracy: ${accuracy}</p>
+            <p>Type: ${type}</p>
+            <p>Damage Class: ${damageClass}</p>
+            <p>Target: ${target}</p>
+        </div>
     `)
 }
 
-const createPokemonDataPage = (results, image) => {
+const createPokemonData = (results, image) => {
     const pokemon = results.name;
     const type = results.types.map(type => type.type.name);
     const pokeNumber = results.id;
@@ -55,37 +53,38 @@ const createPokemonDataPage = (results, image) => {
         `)
     }).join("");
 
-
-
     return (`
-    <div class="container">
-        <form class="form">
-            <label for="input" class="form-label">Choose your fav Pokemon! </label>
-            <input type="text" class="input" placeholder="pokemon name or #" required>
-            <button type="submit" class="submit-button">Search</button>
-        </form>
-    </div>
+        <div class="container">
+            <form class="form">
+                <label for="input" class="form-label">Choose your fav Pokemon! </label>
+                <input type="text" class="input" placeholder="pokemon name or #" required>
+                <button type="submit" class="submit-button">Search</button>
+            </form>
+        </div>
 
-    <div class="container-2">
-        <p> I choose you <span class="name">${pokemon} !</span> </p>
-        <p> Pokemon No. ${pokeNumber} </p>
-        <p> Type: ${type} </p>
-        <p> Species: ${species} <p>
-        <p> Weight: ${weight} </p>
-        <ul> <span class="attack-list">Attacks:</span> ${moves}</ul>
-        <ul> <span class="ability-list">Abilities:</span> 
-            <li class="ability-li">${abilities}</li>
-        </ul>
+        <div class="container-2">
+            <p> I choose you <span class="name">${pokemon} !</span> </p>
+            <p> Pokemon No. ${pokeNumber} </p>
+            <p> Type: ${type} </p>
+            <p> Species: ${species} <p>
+            <p> Weight: ${weight} </p>
+            <ul> <span class="attack-list">Attacks:</span> ${moves}</ul>
+            <ul> <span class="ability-list">Abilities:</span> 
+                <li class="ability-li">${abilities}</li>
+            </ul>
 
-    </div>`
+        </div>`
     )
 }
+
+/* ---------- TEMPLATES ---------- */
+
 
 const landingPageText = (`
     <p> Welcome to the Pokémon Podédex! Click on the Pokédex to learn about over 800 Pokémon! Including their types, species, attacks, etc. You can choose by name, id number, or click the Pokédex for a random Pokémon! </p>
 `)
 
-const formPage = (`
+const pokedexPage = (`
     <div class="container">
         <form class="form">
             <label for="input" class="form-label">Choose your fav Pokemon! </label>
@@ -96,25 +95,24 @@ const formPage = (`
 `)
 
 /* ---------- RENDER FUNCTION ---------- */
-const element = $('#page');
-
-const renderPokemonResults = response => {    
-    const pokemonDataPage = createPokemonDataPage(response);
-    element.html(pokemonDataPage)
-}
 
 const renderAttackMoveResults = response => {
-    const attackMove = createAttackMovePage(response)
-    element.html(attackMove)
+    const attackMove = createAttackMoveData(response)
+    $('#attack-move').html(attackMove)
+}
+
+const renderPokemonResults = response => {    
+    const pokemonData = createPokemonData(response);
+    $('#page').html(pokemonData)
 }
 
 const renderPokemonPage = () => {
     $('#page').html('');
-    $('#page').html(formPage);
+    $('#page').html(pokedexPage);
 }
 
 const renderLandingPage = () => {
-    $('#page').html('');
+    $('#attack-move').html('');
     $('#page').html(landingPageText);
 }
 
