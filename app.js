@@ -12,6 +12,30 @@ const setState = (newItem, currentState=STATE) => {
 
 /* ---------- TEMPLATE HELPERS ---------- */
 
+const createAttackMovePage = results => {
+    const accuracy = results.accuracy;
+    const damageClass = results.damage_class.name;
+    const name = results.name;
+    const power = results.power;
+    const pp = results.pp;
+    const target = results.target.name;
+    const type = results.type.name;
+
+    console.log(accuracy, damageClass, name, power, pp, target, type)
+
+    return (`
+    <div class="container-2">
+        <p>Name: ${name}</p>
+        <p>Power: ${power}</p>
+        <p>PP: ${pp}</p>
+        <p>Accuracy: ${accuracy}</p>
+        <p>Type: ${type}</p>
+        <p>Damage Class: ${damageClass}</p>
+        <p>Target: ${target}</p>
+    </div>
+    `)
+}
+
 const createPokemonDataPage = (results, image) => {
     const pokemon = results.name;
     const type = results.types.map(type => type.type.name);
@@ -52,7 +76,7 @@ const createPokemonDataPage = (results, image) => {
         <ul> <span class="ability-list">Abilities:</span> 
             <li class="ability-li">${abilities}</li>
         </ul>
-        <div> <img src="${image} alt="poke pic"> </div>
+
     </div>`
     )
 }
@@ -79,6 +103,11 @@ const renderPokemonResults = response => {
     element.html(pokemonDataPage)
 }
 
+const renderAttackMoveResults = response => {
+    const attackMove = createAttackMovePage(response)
+    element.html(attackMove)
+}
+
 const renderPokemonPage = () => {
     $('#page').html('');
     $('#page').html(formPage);
@@ -99,21 +128,21 @@ const render = () => {
 
 /* ---------- AJAX REQUEST ---------- */
 
-const getApiImage = (query, data) => {
-    console.log('fetching poke image')
+// const getApiImage = (query, data) => {
+//     console.log('fetching poke image')
 
-    const options = {
-        type: 'GET', 
-        "url": `${query}`,
-        success: image => {
-            renderPokemonResults(data, image)
-            console.log('Success, image')
-        },
-        catch: err => console.log(err)
-    }
+//     const options = {
+//         type: 'GET', 
+//         "url": `${query}`,
+//         success: image => {
+//             renderPokemonResults(data, image)
+//             console.log('Success, image')
+//         },
+//         catch: err => console.log(err)
+//     }
 
-    $.ajax(options)
-}
+//     $.ajax(options)
+// }
 
 const getApiData = (query) => {
     console.log('user input:', query)
@@ -124,7 +153,8 @@ const getApiData = (query) => {
         success: data => {
             console.log('Success, data:', data.sprites.front_default)
             const image = data.sprites.front_default
-            getApiImage(image, data)
+            // getApiImage(image, data)
+            renderPokemonResults(data)
         },
         catch: err => console.log(err)
     }
@@ -132,10 +162,25 @@ const getApiData = (query) => {
     $.ajax(options);
 }
 
+const getApiAttackMove = query => {
+    console.log('getting attack move data')
+
+    const options = {
+        type: 'GET',
+        "url": `https://pokeapi.co/api/v2/move/${query}`,
+        success: data => {
+            console.log('attack move info', data)
+            renderAttackMoveResults(data);
+        },
+        catch: err => console.log(err)
+    }
+
+    $.ajax(options)
+}
+
 /* ---------- EVENT HANDLERS---------- */
 
 const aboutHandler = () => {
-    console.log('about clicked')
     setState({ route: 'landingPage' })
 }
 
@@ -145,20 +190,17 @@ const pokedexHandler = () => {
     setState({ route: 'pokemonPage' });
 }
 
-const attackMoveHandler = (event) => {
-    console.log('clicked', this);
-    // const attackMove = $(this).attr("data-type");
-    // const attackMove = $(event.currentTarget);
-    const attackMove = $("li").data("type")
-
-    console.log('attackMove', attackMove)
+const attackMoveHandler = event => {
+    const selected = $(event.target)
+    const type = selected.data('type')
+    getApiAttackMove(type)
 }
 
 const inputHandler = event => {
     event.preventDefault();
     const userInput = $(event.currentTarget).find('.input').val();
     console.log(userInput)
-    if (userInput == ""){
+    if (userInput == "") {
         getApiData(userInput);
     } else {
         toastr.warning('Please fill in field with a pokemon or No. from 1 to 893');
@@ -169,7 +211,7 @@ const inputHandler = event => {
 
 $('header').on('click', '#nav-button-about', () => aboutHandler());
 $('header').on('click', '#nav-button-pokedex', () => pokedexHandler());
-$('body').on('click', '.move-list', (event) => attackMoveHandler(event));
+$('body').on('click', '.move-list', event => attackMoveHandler(event));
 
 $('body').on('submit', '.form', event => inputHandler(event));
 
