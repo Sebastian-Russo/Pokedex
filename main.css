@@ -140,7 +140,8 @@ button:hover {
 }
 
 footer {
-    position: absolute;
+    position: relative;
+    float: right;
     bottom: 10px;
     right: 0;
     margin: auto;

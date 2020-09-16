@@ -39,15 +39,16 @@ const createPokemonData = (results, image) => {
     const type = results.types.map(type => type.type.name);
     const pokeNumber = results.id;
     const attacks = results.moves.map(move => move.move.name);
-    const abilities = results.abilities.map(object => object.ability.name).join("");
+    const abilities = results.abilities.length < 1 ? "unknown" : results.abilities.map(object => object.ability.name).join("");
     const species = results.species.name;
     const weight = results.weight;
 
     let moveList = [];
-        for (let i = 0; i < 10; i++) {
-            moveList.push(attacks[i])
-        }
-    const moves = moveList.map(move => {
+    for (let i = 0; i < 10; i++) {
+        moveList.push(attacks[i])
+    }   
+
+    const moves = moveList[0] === undefined ? "unknown" : moveList.map(move => {
         return (`
             <li data-type=${move} class="move-list"> ${move} </li>        
         `)
@@ -150,8 +151,9 @@ const getApiData = (query) => {
         "url": `https://pokeapi.co/api/v2/pokemon/${query}`,
         success: data => {
             console.log('Success, data:', data.sprites.front_default)
-            const image = data.sprites.front_default
+            // const image = data.sprites.front_default
             // getApiImage(image, data)
+            console.log('DATA', data)
             renderPokemonResults(data)
         },
         catch: err => console.log(err)
@@ -198,7 +200,7 @@ const inputHandler = event => {
     event.preventDefault();
     const userInput = $(event.currentTarget).find('.input').val();
     console.log(userInput)
-    if (userInput == "") {
+    if (userInput) {
         getApiData(userInput);
     } else {
         toastr.warning('Please fill in field with a pokemon or No. from 1 to 893');
