@@ -74,6 +74,7 @@ p {
     margin: auto;
     margin-top: 1em;
     width: 80%;
+    line-height: 2;
 }
 
 ul {
@@ -81,6 +82,14 @@ ul {
     width: 90%;
     margin: auto;
     margin-top: 10px;
+}
+li {
+    text-decoration: none;
+    color: yellow;
+}
+li:hover {
+    color: red;
+    transition: .3s ease-in-out;
 }
 li.logo-container {
     margin: 10px;
@@ -118,14 +127,6 @@ span.ability-list {
     font-size: larger;
 }
 
-a {
-    text-decoration: none;
-    color: yellow;
-}
-li:hover {
-    color: red;
-    transition: .3s ease-in-out;
-}
 
 
 button {
@@ -138,7 +139,13 @@ button:hover {
     color: red;
 }
 
-
+footer {
+    position: absolute;
+    bottom: 10px;
+    right: 0;
+    margin: auto;
+    padding: 20px;
+}
 
 @media screen and (max-width: 600px) {
    

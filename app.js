@@ -12,7 +12,7 @@ const setState = (newItem, currentState=STATE) => {
 
 /* ---------- TEMPLATE HELPERS ---------- */
 
-const createPokemonDataPage = results => {
+const createPokemonDataPage = (results, image) => {
     const pokemon = results.name;
     const type = results.types.map(type => type.type.name);
     const pokeNumber = results.id;
@@ -27,9 +27,11 @@ const createPokemonDataPage = results => {
         }
     const moves = moveList.map(move => {
         return (`
-            <a href="#"><li> ${move} </li></a>        
+            <li data-type=${move} class="move-list"> ${move} </li>        
         `)
     }).join("");
+
+
 
     return (`
     <div class="container">
@@ -46,18 +48,17 @@ const createPokemonDataPage = results => {
         <p> Type: ${type} </p>
         <p> Species: ${species} <p>
         <p> Weight: ${weight} </p>
-        <ul> <span class="attack-list">Attacks:</span> 
-            <li class="attack-li">${moves}</li>
-        </ul>
+        <ul> <span class="attack-list">Attacks:</span> ${moves}</ul>
         <ul> <span class="ability-list">Abilities:</span> 
             <li class="ability-li">${abilities}</li>
         </ul>
+        <div> <img src="${image} alt="poke pic"> </div>
     </div>`
     )
 }
 
 const landingPageText = (`
-    <div> Welcome to the pokemon site! </div>
+    <p> Welcome to the Pokémon Podédex! Click on the Pokédex to learn about over 800 Pokémon! Including their types, species, attacks, etc. You can choose by name, id number, or click the Pokédex for a random Pokémon! </p>
 `)
 
 const formPage = (`
@@ -97,16 +98,35 @@ const render = () => {
 }
 
 /* ---------- AJAX REQUEST ---------- */
+
+const getApiImage = (query, data) => {
+    console.log('fetching poke image')
+
+    const options = {
+        type: 'GET', 
+        "url": `${query}`,
+        success: image => {
+            renderPokemonResults(data, image)
+            console.log('Success, image')
+        },
+        catch: err => console.log(err)
+    }
+
+    $.ajax(options)
+}
+
 const getApiData = (query) => {
     console.log('user input:', query)
 
     const options = {
         type: 'GET', 
-        "url": `https://pokeapi.co/api/v2/pokemon/${query}?limit=20&offset=20`,
+        "url": `https://pokeapi.co/api/v2/pokemon/${query}`,
         success: data => {
-            console.log('Success, data:', data)
-            renderPokemonResults(data)
-        }
+            console.log('Success, data:', data.sprites.front_default)
+            const image = data.sprites.front_default
+            getApiImage(image, data)
+        },
+        catch: err => console.log(err)
     }
 
     $.ajax(options);
@@ -114,29 +134,44 @@ const getApiData = (query) => {
 
 /* ---------- EVENT HANDLERS---------- */
 
-const userAboutHandler = () => {
+const aboutHandler = () => {
     console.log('about clicked')
     setState({ route: 'landingPage' })
 }
 
-const userRandomPokemonHandler = () => {
+const pokedexHandler = () => {
     const randomNumber = Math.floor(Math.random() * 893)
     getApiData(randomNumber);
     setState({ route: 'pokemonPage' });
 }
 
-const userInputHandler = event => {
+const attackMoveHandler = (event) => {
+    console.log('clicked', this);
+    // const attackMove = $(this).attr("data-type");
+    // const attackMove = $(event.currentTarget);
+    const attackMove = $("li").data("type")
+
+    console.log('attackMove', attackMove)
+}
+
+const inputHandler = event => {
     event.preventDefault();
     const userInput = $(event.currentTarget).find('.input').val();
     console.log(userInput)
-    getApiData(userInput);
+    if (userInput == ""){
+        getApiData(userInput);
+    } else {
+        toastr.warning('Please fill in field with a pokemon or No. from 1 to 893');
+    }
 }
 
 /* ---------- EVENT LISTENERS ---------- */
 
-$('header').on('click', '#nav-button-about', () => userAboutHandler());
-$('header').on('click', '#nav-button-random', () => userRandomPokemonHandler());
-$('body').on('submit', '.form', event => userInputHandler(event));
+$('header').on('click', '#nav-button-about', () => aboutHandler());
+$('header').on('click', '#nav-button-pokedex', () => pokedexHandler());
+$('body').on('click', '.move-list', (event) => attackMoveHandler(event));
+
+$('body').on('submit', '.form', event => inputHandler(event));
 
 /* ---------- LOAD PAGE ---------- */
 $(render)
