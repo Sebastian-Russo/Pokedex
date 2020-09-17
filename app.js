@@ -84,8 +84,11 @@ const createPokemonData = (results, image) => {
 
 
 const landingPageText = (`
-    <p> Welcome to the Pokémon Podédex! Click on the Pokédex to learn about over 800 Pokémon! Including their types, species, attacks, etc. You can choose by name, id number, or click the Pokédex for a random Pokémon! </p>
-`)
+    <div class="container-3">
+        <p> Welcome to the Pokémon Podédex! Click on the Pokédex to learn about over 800 Pokémon! Including their types, species, attacks, etc. You can choose by name, id number, or click the Pokédex for a random Pokémon! </p>
+        <div id="pokedex-image"><img src="pokedex.png" alt="pokedex" width="500px" heigh="600"></div>    
+    </div>
+    `)
 
 const pokedexPage = (`
     <div class="container">
@@ -153,7 +156,7 @@ const getApiData = (query) => {
         "url": `https://pokeapi.co/api/v2/pokemon/${query}`,
         success: data => {
             const urlImage = data.sprites.front_default;
-            getApiImage(urlImage, data)
+            // getApiImage(urlImage, data)
             renderPokemonResults(data)
             // console.log('Sprite data:', data.sprites.front_default)
             console.log('All DATA', data)
@@ -213,6 +216,7 @@ const inputHandler = event => {
 
 $('header').on('click', '#nav-button-about', () => aboutHandler());
 $('header').on('click', '#nav-button-pokedex', () => pokedexHandler());
+$('body').on('click', '#pokedex-image', () => pokedexHandler());
 $('body').on('click', '.move-list', event => attackMoveHandler(event));
 
 $('body').on('submit', '.form', event => inputHandler(event));
