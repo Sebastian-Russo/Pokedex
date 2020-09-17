@@ -58,24 +58,29 @@ const createPokemonData = (results, image) => {
 
     return (`
         <div class="container">
-            <form class="form">
-                <label for="input" class="form-label">Choose your fav Pokemon! </label>
-                <input type="text" class="input" placeholder="pokemon name or #" required>
-                <button type="submit" class="submit-button">Search</button>
-            </form>
-        </div>
+            <div class="container-1">
+                <form class="form">
+                    <label for="input" class="form-label">Choose your fav Pokemon! </label>
+                    <input type="text" class="input" placeholder="pokemon name or #" required>
+                    <button type="submit" class="submit-button">Search</button>
+                </form>
+            </div>
 
-        <div class="container-2">
-            <p> I choose you <span class="name">${pokemon} !</span> </p>
-            <p> Pokemon No. ${pokeNumber} </p>
-            <p> Type: ${type} </p>
-            <p> Species: ${species} <p>
-            <p> Weight: ${weight} </p>
-            <ul> <span class="attack-list">Attacks:</span> ${moves}</ul>
-            <ul> <span class="ability-list">Abilities:</span> 
-                <li class="ability-li">${abilities}</li>
-            </ul>
+            <div class="container-2">
+                <p> I choose you <span class="name">${pokemon} !</span> </p>
+                <p> Pokemon No. ${pokeNumber} </p>
+                <div class="sprite-container">
+                    <img class="sprite-image" src="sprites-master/sprites/pokemon/${pokeNumber}.png" alt="pokemon" />
+                </div>
+                <p> Type: ${type} </p>
+                <p> Species: ${species} <p>
+                <p> Weight: ${weight} </p>
+                <ul> <span class="attack-list">Attacks:</span> ${moves}</ul>
+                <ul> <span class="ability-list">Abilities:</span> 
+                    <li class="ability-li">${abilities}</li>
+                </ul>
 
+            </div>
         </div>`
     )
 }
@@ -91,7 +96,7 @@ const landingPageText = (`
     `)
 
 const pokedexPage = (`
-    <div class="container">
+    <div class="container-1">
         <form class="form">
             <label for="input" class="form-label">Choose your fav Pokemon! </label>
             <input type="text" class="input" placeholder="pokemon name or #" required>
@@ -114,6 +119,7 @@ const renderPokemonResults = response => {
 
 const renderPokemonPage = () => {
     $('#page').html('');
+    $('#attack-move').html('');
     $('#page').html(pokedexPage);
 }
 
@@ -155,7 +161,7 @@ const getApiData = (query) => {
         type: 'GET', 
         "url": `https://pokeapi.co/api/v2/pokemon/${query}`,
         success: data => {
-            const urlImage = data.sprites.front_default;
+            // const urlImage = data.sprites.front_default;
             // getApiImage(urlImage, data)
             renderPokemonResults(data)
             // console.log('Sprite data:', data.sprites.front_default)

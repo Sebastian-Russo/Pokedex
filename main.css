@@ -20,23 +20,42 @@ body {
     font-size: small;
 }
 
-.container-2 {
-    border: solid;
-    padding: 10px;
-    display: inline-block;
-    position: relative;
-    font-size: 100%;
-    color: yellow;
-    width: 100%;
-}
-.container-3 {
+.container {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    /* align-items: flex-start; */
+
+}
+/* .container-1 {
+    flex: 1;
     border: solid;
-    margin: auto;
+    color: yellow;
+} */
+.container-2 {
+    flex: 1;
+    border: solid;
+    padding: 10px;
     color: yellow;
     width: 80%;
+    margin: auto;
+    /* display: flex;
+    flex-direction: column;
+    justify-content: right; */
+}
+.container-3 {
+    flex: 1;
+    /* display: flex; */
+    /* flex-direction: column; */
+    border: solid;
+    color: yellow;
+    justify-content: center;
+}
+.sprite-container {
+    width: 50;
+    height: 60;
+    margin: auto;
+    /* background-color: white; */
+    /* overflow: hidden; */
 }
 
 form {
@@ -77,19 +96,15 @@ form {
   }
 
 p {
-    color: yellow;
-    font-weight: bolder;
-    margin: auto;
-    margin-top: 1em;
-    width: 80%;
     line-height: 2;
-}
+    text-align: center;
+} 
 
 ul {
     list-style-type: none;
-    width: 90%;
-    margin: auto;
+    padding: 0;
     margin-top: 10px;
+    text-align: center;
 }
 li {
     text-decoration: none;
@@ -112,10 +127,7 @@ li.logo-container {
     float: left;
     line-height: 14;
 }
-/* .ability-li {
-    float: left;
-    line-height: 14;
-} */
+
 
 span.name {
     text-transform: capitalize;
@@ -135,10 +147,19 @@ span.ability-list {
     font-size: larger;
 }
 
+.sprite-image {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 20%;
+    height: 25%;
+}
+
 #pokedex-image {
-    width: 100px;
-    height: 120px;
-    justify-content: right;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 40%;
 }
 
 
@@ -152,6 +173,7 @@ button:hover {
     color: red;
 }
 
+
 footer {
     position: relative;
     float: right;
@@ -159,6 +181,7 @@ footer {
     right: 0;
     margin: auto;
     padding: 20px;
+    color: white;
 }
 
 @media screen and (max-width: 600px) {
