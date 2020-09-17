@@ -90,8 +90,9 @@ const createPokemonData = (results, image) => {
 
 const landingPageText = (`
     <div class="container-3">
-        <p> Welcome to the Pokémon Podédex! Click on the Pokédex to learn about over 800 Pokémon! Including their types, species, attacks, etc. You can choose by name, id number, or click the Pokédex for a random Pokémon! </p>
-        <div id="pokedex-image"><img src="pokedex.png" alt="pokedex" width="500px" heigh="600"></div>    
+        <p> Welcome to the Pokémon Podédex! <span class="landing-text">Click the Pokédex</span> to learn about over 800 Pokémon! Including their types, species, attacks, etc. You can choose by name, id number, or click the Pokédex for a random Pokémon! </p>
+        <div id="pokedex-image-1"><img src="pokedex.png" alt="pokedex" width="500px" heigh="600"></div>    
+    
     </div>
     `)
 

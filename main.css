@@ -18,6 +18,7 @@ body {
     background: rgb(0, 153, 255);
     font-family: pokemon-gb-font;
     font-size: small;
+    color: white;
 }
 
 .container {
@@ -43,12 +44,7 @@ body {
     justify-content: right; */
 }
 .container-3 {
-    flex: 1;
-    /* display: flex; */
-    /* flex-direction: column; */
-    border: solid;
-    color: yellow;
-    justify-content: center;
+    padding: 30px;
 }
 .sprite-container {
     width: 50;
@@ -155,13 +151,19 @@ span.ability-list {
     height: 25%;
 }
 
-#pokedex-image {
+#pokedex-image-1 {
     display: block;
     margin-left: auto;
     margin-right: auto;
     width: 40%;
 }
+#pokedex-image-1:hover {
+    cursor: alias;
+}
 
+.landing-text {
+    color: yellow;
+}
 
 button {
     color: yellow;
@@ -181,7 +183,6 @@ footer {
     right: 0;
     margin: auto;
     padding: 20px;
-    color: white;
 }
 
 @media screen and (max-width: 600px) {
