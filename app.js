@@ -223,7 +223,7 @@ const inputHandler = event => {
 
 $('header').on('click', '#nav-button-about', () => aboutHandler());
 $('header').on('click', '#nav-button-pokedex', () => pokedexHandler());
-$('body').on('click', '#pokedex-image', () => pokedexHandler());
+$('body').on('click', '#pokedex-image-1', () => pokedexHandler());
 $('body').on('click', '.move-list', event => attackMoveHandler(event));
 
 $('body').on('submit', '.form', event => inputHandler(event));
