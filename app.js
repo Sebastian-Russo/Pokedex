@@ -159,7 +159,11 @@ const getApiData = (query) => {
             // console.log('Sprite data:', data.sprites.front_default)
             console.log('All DATA', data)
         },
-        catch: err => console.log(err)
+        error: err => {
+            if(err.status === 404) {
+                toastr.error('Pokemon does not exist! Enter No. 1 to 893 or type name');
+            }
+        }
     }
 
     $.ajax(options);
@@ -175,7 +179,7 @@ const getApiAttackMove = query => {
             console.log('attack move info', data)
             renderAttackMoveResults(data);
         },
-        catch: err => console.log(err)
+        error: err => console.log(err)
     }
 
     $.ajax(options)
@@ -203,11 +207,8 @@ const inputHandler = event => {
     event.preventDefault();
     const userInput = $(event.currentTarget).find('.input').val();
     console.log(userInput)
-    if (userInput) {
-        getApiData(userInput);
-    } else {
-        toastr.warning('Please fill in field with a pokemon or No. from 1 to 893');
-    }
+    getApiData(userInput);
+
 }
 
 /* ---------- EVENT LISTENERS ---------- */
