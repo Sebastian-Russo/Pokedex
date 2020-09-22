@@ -57,15 +57,6 @@ const createPokemonData = (results, image) => {
     }).join("");
 
     return (`
-        <div class="container">
-            <div class="container-1">
-                <form class="form">
-                    <label for="input" class="form-label">Choose your fav Pokemon! </label>
-                    <input type="text" class="input" placeholder="pokemon name or #" required>
-                    <button type="submit" class="submit-button">Search</button>
-                </form>
-            </div>
-
             <div class="container-2">
                 <p> I choose you <span class="name">${pokemon} !</span> </p>
                 <p> Pokemon No. ${pokeNumber} </p>
@@ -119,9 +110,9 @@ const renderPokemonResults = response => {
 }
 
 const renderPokemonPage = () => {
-    $('#page').html('');
+    $('#search').html('');
     $('#attack-move').html('');
-    $('#page').html(pokedexPage);
+    $('#search').html(pokedexPage);
 }
 
 const renderLandingPage = () => {
