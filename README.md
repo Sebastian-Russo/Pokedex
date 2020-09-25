@@ -1,5 +1,7 @@
 #Pokémon Pokédex 
 
+Link to site: https://seb-pokedex.herokuapp.com/
+
 Because who doesn't need to identify Pokémon they may see out in the wild? 
 
 Select 1-893 Pokémon by name, Pokémon No., or randomly generate one, from the API's database. 
