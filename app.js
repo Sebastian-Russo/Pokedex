@@ -46,7 +46,7 @@ const createPokemonData = (results, image) => {
     console.log('IMAGE', image)
 
     let moveList = [];
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < attacks.length; i++) {
         moveList.push(attacks[i])
     }   
 
@@ -65,9 +65,9 @@ const createPokemonData = (results, image) => {
                 </div>
                 <p> Type: ${type} </p>
                 <p> Species: ${species} <p>
-                <p> Weight: ${weight} </p>
-                <ul> <span class="attack-list">Attacks:</span> ${moves}</ul>
-                <ul> <span class="ability-list">Abilities:</span> 
+                <p> Weight: ${weight} lb</p>
+                <ul id="attack-list"> <span class="attack-list">Attacks:</span> ${moves}</ul>
+                <ul> Abilities: 
                     <li class="ability-li">${abilities}</li>
                 </ul>
 
@@ -82,7 +82,7 @@ const createPokemonData = (results, image) => {
 const landingPageText = (`
     <div class="container-3">
         <p> Welcome to the Pokémon Podédex! <span class="landing-text">Click the Pokédex</span> to learn about over 800 Pokémon! Including their types, species, attacks, etc. You can choose by name, id number, or click the Pokédex for a random Pokémon! </p>
-        <div id="pokedex-image-1"><img src="pokedex.png" alt="pokedex" width="500px" heigh="600"></div>    
+        <div><img src="pokedex.png" alt="pokedex" id="pokedex-image-1"></div>    
     
     </div>
     `)
