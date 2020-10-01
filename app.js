@@ -92,7 +92,7 @@ const pokedexPage = (`
         <form class="form">
             <label for="input" class="form-label">Choose your fav Pokemon! </label>
             <input type="text" class="input" placeholder="pokemon name or #" required>
-            <button type="submit" class="submit-button">Search</button>
+            <button type="submit" class="submit-button">Look Up Pokémon</button>
         </form>
     </div>
 `)
@@ -213,8 +213,8 @@ const inputHandler = event => {
 
 /* ---------- EVENT LISTENERS ---------- */
 
-$('header').on('click', '#nav-button-about', () => aboutHandler());
-$('header').on('click', '#nav-button-pokedex', () => pokedexHandler());
+$('.navbar').on('click', '#nav-button-about', () => aboutHandler());
+$('.navbar').on('click', '#nav-button-pokedex', () => pokedexHandler());
 $('body').on('click', '#pokedex-image-1', () => pokedexHandler());
 $('body').on('click', '.move-list', event => attackMoveHandler(event));
 

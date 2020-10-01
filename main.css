@@ -68,33 +68,35 @@ form {
 
 /* NAV BAR */
 
-.header {
+.navbar {
     width: 100%;
     height: 80px;
+    padding: 7px;
     position: relative;
 }
 .logo-container {
     height: 100%;
-    display: table;
     float: left;
 }
 
-.header ul {
-    float: right;
+.navbar ul {
     margin-right: 20px;
+    justify-content: flex-end;
+    display: flex;
 }
 
-.header ul li{
-    display: inline-block;
+.navbar ul li{
     margin-top: 30px;
     margin-right: 14px;
     list-style-type: none;
+    flex-shrink: initial;
 }
 
 .nav-link {
     color: white;
     text-decoration: none;
 }
+
 /* POKEDEX DATA */
 
 p {
@@ -187,7 +189,7 @@ footer {
         height: auto;
     }
 
-    .header ul {
+    .navbar ul {
         width: 100%;
         height: 10vh;
         text-align: right;
