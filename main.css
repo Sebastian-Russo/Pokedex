@@ -186,18 +186,11 @@ footer {
     }
 
     .navbar ul {
-
         margin-top: 35px;
         text-align: right;
     }
 
    #pokedex-image-1 {
-       width: 50%;
+       width: 60%;
    }
-
-   .container-2 {
-        margin: auto;
-
-   }
-
 }
