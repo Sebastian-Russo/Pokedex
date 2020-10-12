@@ -130,22 +130,6 @@ const render = () => {
 
 /* ---------- AJAX REQUEST ---------- */
 
-// const getApiImage = (query, data) => {
-//     console.log('sprite URL, fetching image', query)
-
-//     const options = {
-//         type: 'GET', 
-//         "url": `https://pokeapi.co/api/v2/pokemon-form/${query}`,
-//         success: image => {
-//             renderPokemonResults(data, image)
-//             console.log('Success, image')
-//         },
-//         catch: err => console.log(err)
-//     }
-
-//     $.ajax(options)
-// }
-
 const getApiData = (query) => {
     console.log('user input:', query)
 
@@ -153,10 +137,7 @@ const getApiData = (query) => {
         type: 'GET', 
         "url": `https://pokeapi.co/api/v2/pokemon/${query}`,
         success: data => {
-            // const urlImage = data.sprites.front_default;
-            // getApiImage(urlImage, data)
             renderPokemonResults(data)
-            // console.log('Sprite data:', data.sprites.front_default)
             console.log('All DATA', data)
         },
         error: err => {
