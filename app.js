@@ -39,7 +39,7 @@ const createPokemonData = (results, image) => {
     const type = results.types.map(type => type.type.name);
     const pokeNumber = results.id;
     const attacks = results.moves.map(move => move.move.name);
-    const abilities = results.abilities.length < 1 ? "unknown" : results.abilities.map(object => object.ability.name).join("");
+    const abilities = results.abilities.length < 1 ? "unknown" : results.abilities.map(object => object.ability.name);
     const species = results.species.name;
     const weight = results.weight;
     
@@ -52,7 +52,7 @@ const createPokemonData = (results, image) => {
 
     const moves = moveList[0] === undefined ? "unknown" : moveList.map(move => {
         return (`
-            <li data-type=${move} class="move-list"> ${move} </li>        
+            <li data-type=${move} class="move-list attack-list"> ${move} </li>        
         `)
     }).join("");
 
@@ -66,10 +66,10 @@ const createPokemonData = (results, image) => {
                 <p> Type: ${type} </p>
                 <p> Species: ${species} <p>
                 <p> Weight: ${weight} lb</p>
-                <ul id="attack-list"> <span class="attack-list">Attacks:</span> ${moves}</ul>
                 <ul> Abilities: 
                     <li class="ability-li">${abilities}</li>
                 </ul>
+                <ul id="attack-list"> Attacks: ${moves}</ul>
 
             </div>
         </div>`
